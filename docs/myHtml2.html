@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>calculator</title>
+</head>
+<body >
+    <div id='input'>
+    </div>
+    <div>
+        <button onclick="calculator2(1)">1</button>
+        <button onclick="calculator2(2)">2</button>
+        <button onclick="calculator2(3)">3</button>
+        <button onclick="calculator2('+')">+</button>
+    </div>
+    <div>
+        <button onclick="calculator2(4)">4</button>
+        <button onclick="calculator2(5)">5</button>
+        <button onclick="calculator2(6)">6</button>
+        <button onclick="calculator2('-')">-</button>
+    </div>
+    <div>
+        <button onclick="calculator2(7)">7</button>
+        <button onclick="calculator2(8)">8</button>
+        <button onclick="calculator2(9)">9</button>
+        <button onclick="calculator2('*')">*</button>
+    </div>
+    <div>
+        <button onclick="clir()">c</button>
+        <button onclick="calculator2(0)">0</button>
+        <button onclick="calculator2('=')">=</button>
+        <button onclick="calculator2('/')">/</button>
+    </div> 
+    <div id='input3'>
+    </div>               
+    <script>
+        let a = []
+        let num1=''
+        let num2=''
+        let cal='+'
+        let cik=''
+        function clir(){
+            document.getElementById('input3').innerHTML=document.getElementById('input3').innerHTML+document.getElementById('input').innerHTML+'<br>'
+            cal='+'
+            num2=''
+            num1=''
+            document.getElementById('input').innerHTML=''
+        }
+        function calculator2(c){
+            console.log('calculator2.stert c = ',c,"input = ",document.getElementById('input').innerHTML)
+            if(document.getElementById('input').innerHTML==0&&c!='='){
+                document.getElementById('input').innerHTML=''
+            }
+            if((c=='+'||c=='*'||c=='/'||c=='-')&&(document.getElementById('input').innerHTML[document.getElementById('input').innerHTML.length-1]=='+'||document.getElementById('input').innerHTML[document.getElementById('input').innerHTML.length-1]=='-'||document.getElementById('input').innerHTML[document.getElementById('input').innerHTML.length-1]=='*'||document.getElementById('input').innerHTML[document.getElementById('input').innerHTML.length-1]=='/')){
+                let xx =''
+                for (let index = 0; index < document.getElementById('input').innerHTML.length-1; index++) {
+                    xx = xx +document.getElementById('input').innerHTML[index] 
+                }
+                document.getElementById('input').innerHTML=xx+c
+            }else{
+            document.getElementById('input').innerHTML=document.getElementById('input').innerHTML+c}
+            if(c=='='){
+                calculator()
+                document.getElementById('input3').innerHTML=document.getElementById('input3').innerHTML+document.getElementById('input').innerHTML+num1+'<br>'
+                document.getElementById('input').innerHTML=num1
+                num1=''
+
+            }
+            console.log("calculator2.end input = ",document.getElementById('input').innerHTML)
+        }
+        function calculator(){
+            console.log('calculator')
+            // document.getElementById('input2').value='a'
+            for (let index = 0; index < document.getElementById('input').innerHTML.length; index++) {
+                if(document.getElementById('input').innerHTML[index]=='+'|| document.getElementById('input').innerHTML[index]=='-'||document.getElementById('input').innerHTML[index]=='*'||document.getElementById('input').innerHTML[index]=='/'){
+                    calculator1()
+                    cal=document.getElementById('input').innerHTML[index]
+                }else{
+                    if(document.getElementById('input').innerHTML[index]=='='){
+                        calculator1()
+                        cal='+'
+                    }else{
+                    num2=num2+document.getElementById('input').innerHTML[index]
+                    }
+                }
+            }
+            console.log('calculator.end')
+        }
+        function calculator1(){
+            console.log('calculator1.stert  num1 = ',num1,'num2 = ',num2,'cel = ',cal)
+            console.error('error')
+            switch (cal) {
+                case '+':  
+                num1=''+((num1*1)+(num2*1)) 
+                    break;
+                case '-':
+                num1=''+((num1*1)-(num2*1))
+                    break;
+                case '*':
+                num1=''+((num1*1)*(num2*1))
+                    break;
+                case '/':
+                num1=''+((num1*1)/(num2*1))
+                    break;
+                default:
+                    break;
+            }
+            num2=''
+            console.log('calculator1.end num1 = ',num1,'num2 = ',num2,'cel = ',cal)
+        } 
+    </script>
+</body>
+</html>
